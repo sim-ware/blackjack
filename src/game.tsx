@@ -63,7 +63,33 @@ const setupGame = (): GameState => {
 // 
 // Scoring //
 const calculateHandScore = (hand: Hand): number => {
-  return 0;
+  let totalScore = 0;
+  let aces = 0
+
+  hand.forEach((card:Card) => {
+    const { rank } = card;
+
+    const cardFaceValue = parseInt(rank);
+    const cardHasValidFaceValue = !isNaN(cardFaceValue);
+
+    if (cardHasValidFaceValue) totalScore += cardFaceValue;
+    if (rank === 'jack')  totalScore += 10;
+    if (rank === 'queen') totalScore += 10;
+    if (rank === 'king')  totalScore += 10;
+    if (rank === 'ace')   aces++;
+  });
+
+  if (totalScore === 10 && aces === 1) return totalScore += 11;
+  if (totalScore === 10 && aces > 1)   return totalScore += aces;
+
+  for (let i = 0; i < aces; i++) {
+    const currentScore    = totalScore + 11;
+    const isGreaterThan21 = currentScore > 21;
+
+    isGreaterThan21 ? totalScore += 1 : totalScore += 11;
+  }
+
+  return totalScore;
 };
 
 const determineGameResult = (state: GameState): GameResult => {
