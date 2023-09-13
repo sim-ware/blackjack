@@ -9,15 +9,17 @@ import {
   GameResult,
 } from "./types";
 
-//UI Elements
+// 
+// UI Elements //
 const CardBackImage = () => (
-  <img src={process.env.PUBLIC_URL + `/SVG-cards/png/1x/back.png`} />
+  <img alt="Back of card" src={process.env.PUBLIC_URL + `/SVG-cards/png/1x/back.png`} />
 );
 
 const CardImage = ({ suit, rank }: Card) => {
   const card = rank === CardRank.Ace ? 1 : rank;
   return (
     <img
+      alt="Front of card"
       src={
         process.env.PUBLIC_URL +
         `/SVG-cards/png/1x/${suit.slice(0, -1)}_${card}.png`
@@ -26,7 +28,8 @@ const CardImage = ({ suit, rank }: Card) => {
   );
 };
 
-//Setup
+// 
+// Setup //
 const newCardDeck = (): CardDeck =>
   Object.values(CardSuit)
     .map((suit) =>
@@ -57,7 +60,8 @@ const setupGame = (): GameState => {
   };
 };
 
-//Scoring
+// 
+// Scoring //
 const calculateHandScore = (hand: Hand): number => {
   return 0;
 };
@@ -66,7 +70,8 @@ const determineGameResult = (state: GameState): GameResult => {
   return "no_result";
 };
 
-//Player Actions
+// 
+// Player Actions //
 const playerStands = (state: GameState): GameState => {
   return {
     ...state,
@@ -83,7 +88,8 @@ const playerHits = (state: GameState): GameState => {
   };
 };
 
-//UI Component
+// 
+// UI Component //
 const Game = (): JSX.Element => {
   const [state, setState] = useState(setupGame());
 
@@ -123,7 +129,7 @@ const Game = (): JSX.Element => {
         </div>
       )}
       {state.turn === "dealer_turn" &&
-      determineGameResult(state) != "no_result" ? (
+      determineGameResult(state) !== "no_result" ? (
         <p>{determineGameResult(state)}</p>
       ) : (
         <p>{state.turn}</p>

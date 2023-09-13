@@ -1,15 +1,14 @@
-Installation
-1 - Install required packages: `yarn` (or npm)
+# BlackJack
 
-2 - Run the local dev server with `yarn start`
+#### Installation
+1. Install required packages: `yarn` (or npm)
+2. Run the local dev server with `yarn start`
+3. Run the test suit with `yarn test`
 
-3 - Run the test suit with `yarn test`
-
-Aim
+#### Aim
 * Fix the tests to make the game work!
 
-Rules
-
+#### Rules
 * This is a simplified version of BlackJack so there are only two players the 'player' and the 'dealer'. There is also no gambling!
 * The game is played with a deck of 52 cards
 * At the start of the game the deck is shuffled and two cards are dealt to the player and the dealer
@@ -19,14 +18,12 @@ Rules
 * After the player has had their turn, the dealer will turn over their first card.
 * If the dealer has a score of 16 or less then the dealer must take another card
 
-Result
-
+#### Result
 * If the player or the dealer goes over 21 then they will 'bust' and lose.
 * If no player has bust then the player with the higher point total will win.
 * If both players have the same score the result is a draw unless one player has blackjack in which case they win.
 
-Scoring
-
+#### Scoring
 * Aces may be counted as 1 or 11 points. The higher value applies if it does not cause the player to go over 21
 * Cards 2 to 9 are same as face value (e.g 5 = 5 points)
 * Ten, Jack, Queen and King cards count as ten points.
