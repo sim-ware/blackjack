@@ -55,7 +55,7 @@ const setupGame = (): GameState => {
   return {
     playerHand: cardDeck.slice(cardDeck.length - 2, cardDeck.length),
     dealerHand: cardDeck.slice(cardDeck.length - 4, cardDeck.length - 2),
-    cardDeck: cardDeck.slice(0, cardDeck.length - 4), // remaining cards after player and dealer have been give theirs
+    cardDeck: cardDeck.slice(0, cardDeck.length - 4), // remaining cards after player and dealer have been given theirs
     turn: "player_turn",
   };
 };
@@ -73,10 +73,10 @@ const calculateHandScore = (hand: Hand): number => {
     const cardHasValidFaceValue = !isNaN(cardFaceValue);
 
     if (cardHasValidFaceValue) totalScore += cardFaceValue;
-    if (rank === 'jack')  totalScore += 10;
-    if (rank === 'queen') totalScore += 10;
-    if (rank === 'king')  totalScore += 10;
-    if (rank === 'ace')   aces++;
+    if (rank === 'jack')       totalScore += 10;
+    if (rank === 'queen')      totalScore += 10;
+    if (rank === 'king')       totalScore += 10;
+    if (rank === 'ace')        aces++;
   });
 
   if (totalScore === 10 && aces === 1) return totalScore += 11;
@@ -99,6 +99,20 @@ const determineGameResult = (state: GameState): GameResult => {
 // 
 // Player Actions //
 const playerStands = (state: GameState): GameState => {
+  const { dealerHand } = state
+  const score = calculateHandScore(dealerHand);
+  const sixteenOrLess = score <= 16;
+
+  if (sixteenOrLess) {
+    const { card, remaining } = takeCard(state.cardDeck);
+    return {
+      ...state,
+      dealerHand: [...state.dealerHand, card],
+      cardDeck: remaining,
+      turn: "dealer_turn",
+    };
+  }
+
   return {
     ...state,
     turn: "dealer_turn",

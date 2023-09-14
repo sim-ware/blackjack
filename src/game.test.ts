@@ -99,7 +99,7 @@ describe("The player actions", () => {
     );
   });
 
-  test("When the player 'Stands' and the dealers score is 17 or more the dealer does not take another card", () => {
+  test("When the player 'Stands' and the dealer has a score of 17 or more then the dealer must not take another card", () => {
     const initialGameState = setupGame();
     initialGameState.dealerHand = [
       { suit: CardSuit.Clubs, rank: CardRank.Ten },
