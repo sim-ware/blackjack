@@ -64,7 +64,7 @@ const setupGame = (): GameState => {
 // Scoring //
 const calculateHandScore = (hand: Hand): number => {
   let totalScore = 0;
-  let aces = 0
+  let aces = 0;
 
   hand.forEach((card:Card) => {
     const { rank } = card;
@@ -110,7 +110,7 @@ const determineGameResult = (state: GameState): GameResult => {
   if (dealerBlackjack) return "dealer_win";
 
   if (playerScore > dealerScore) return "player_win";
-  if (playerScore < dealerScore) return "dealer_win";
+  if (dealerScore > playerScore) return "dealer_win";
 
   if (playerScore === dealerScore) return "draw";
 
