@@ -99,15 +99,15 @@ const determineGameResult = (state: GameState): GameResult => {
 
   const playerBust         = playerScore > 21;
   const dealerBust         = dealerScore > 21;
-  const playerHasBlackjack = playerHand.length === 2 && playerScore === 21;
-  const dealerHasBlackjack = dealerHand.length === 2 && dealerScore === 21;
+  const playerBlackjack    = playerHand.length === 2 && playerScore === 21;
+  const dealerBlackjack    = dealerHand.length === 2 && dealerScore === 21;
 
   if (playerBust) return "dealer_win";
   if (dealerBust) return "player_win";
 
-  if (playerHasBlackjack && dealerHasBlackjack) return "draw";
-  if (playerHasBlackjack) return "player_win";
-  if (dealerHasBlackjack) return "dealer_win";
+  if (playerBlackjack && dealerBlackjack) return "draw";
+  if (playerBlackjack) return "player_win";
+  if (dealerBlackjack) return "dealer_win";
 
   if (playerScore > dealerScore) return "player_win";
   if (playerScore < dealerScore) return "dealer_win";
